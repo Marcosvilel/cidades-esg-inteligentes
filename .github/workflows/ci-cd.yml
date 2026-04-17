@@ -54,18 +54,11 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"query":"mutation { serviceInstanceRedeploy(serviceId: \"${{ secrets.RAILWAY_STAGING_SERVICE_ID }}\") }"}'
           echo "Deploy de Staging disparado"
-
       - name: Health check Staging
         run: |
-          echo "Aguardando 40s para o deploy subir..."
           sleep 40
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://${{ secrets.RAILWAY_STAGING_URL }}/health)
-          echo "Health check retornou: $STATUS"
-          if [ "$STATUS" = "200" ]; then
-            echo "Staging OK"
-          else
-            echo "Staging respondeu com status $STATUS"
-          fi
+          echo "Health check Staging: $STATUS"
 
   deploy-producao:
     name: "4 - Deploy Producao"
@@ -80,15 +73,8 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"query":"mutation { serviceInstanceRedeploy(serviceId: \"${{ secrets.RAILWAY_SERVICE_ID }}\") }"}'
           echo "Deploy de Producao disparado"
-
       - name: Health check Producao
         run: |
-          echo "Aguardando 40s para o deploy subir..."
           sleep 40
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://${{ secrets.RAILWAY_URL }}/health)
-          echo "Health check retornou: $STATUS"
-          if [ "$STATUS" = "200" ]; then
-            echo "Producao OK"
-          else
-            echo "Producao respondeu com status $STATUS"
-          fi
+          echo "Health check Producao: $STATUS"
