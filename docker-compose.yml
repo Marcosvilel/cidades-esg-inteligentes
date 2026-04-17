@@ -1,0 +1,87 @@
+version: "3.9"
+
+# ─────────────────────────────────────────────────────────────
+#  Cidades ESG Inteligentes — Orquestração Docker Compose
+#  Uso: docker compose up -d
+# ─────────────────────────────────────────────────────────────
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+
+services:
+
+  # ── Aplicação Flask ────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: cidades-esg-app:${APP_VERSION:-latest}
+    container_name: cidades-esg-app
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV:-staging}
+      APP_VERSION: ${APP_VERSION:-1.0.0}
+      DB_HOST: postgres
+      DB_NAME: ${DB_NAME:-esgdb}
+      DB_USER: ${DB_USER:-esguser}
+      DB_PASS: ${DB_PASS:-esgpassword}
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    ports:
+      - "${APP_PORT:-5000}:5000"
+
+  # ── Banco de Dados PostgreSQL ──────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: cidades-esg-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-esgdb}
+      POSTGRES_USER: ${DB_USER:-esguser}
+      POSTGRES_PASSWORD: ${DB_PASS:-esgpassword}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-esguser} -d ${DB_NAME:-esgdb}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Cache Redis ────────────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: cidades-esg-cache
+    restart: unless-stopped
+    command: redis-server --maxmemory 64mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

@@ -1,0 +1,19 @@
+test_health_200 (home.claude.cidades-esg.tests.test_app.TestHealth.test_health_200) ... ok
+test_health_status (home.claude.cidades-esg.tests.test_app.TestHealth.test_health_status) ... ok
+test_ready_200 (home.claude.cidades-esg.tests.test_app.TestHealth.test_ready_200) ... ok
+test_home_200 (home.claude.cidades-esg.tests.test_app.TestHome.test_home_200) ... ok
+test_home_ambiente_testing (home.claude.cidades-esg.tests.test_app.TestHome.test_home_ambiente_testing) ... ok
+test_home_json (home.claude.cidades-esg.tests.test_app.TestHome.test_home_json) ... ok
+test_home_status_online (home.claude.cidades-esg.tests.test_app.TestHome.test_home_status_online) ... ok
+test_criar_indicador (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_criar_indicador) ... ok
+test_criar_sem_campos (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_criar_sem_campos) ... ok
+test_criar_sem_json (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_criar_sem_json) ... ok
+test_filtrar_por_cidade (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_filtrar_por_cidade) ... ok
+test_listar_todos (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_listar_todos) ... ok
+test_metodo_nao_permitido (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_metodo_nao_permitido) ... ok
+test_rota_inexistente (home.claude.cidades-esg.tests.test_app.TestIndicadores.test_rota_inexistente) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.020s
+
+OK
