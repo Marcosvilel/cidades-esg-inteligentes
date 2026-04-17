@@ -7,7 +7,9 @@
 | Ambiente | URL | Status |
 |----------|-----|--------|
 | 🟡 Staging | https://cidades-esg-inteligentes-staging.up.railway.app | Online |
+| 🟡 Staging | https://cidades-esg-inteligentes-staging.up.railway.app/indicadores | Online |
 | 🟢 Produção | https://cidades-esg-inteligentes-production-d18d.up.railway.app | Online |
+| 🟢 Produção | https://cidades-esg-inteligentes-production-d18d.up.railway.app/indicadores | Online |
 
 ---
 
