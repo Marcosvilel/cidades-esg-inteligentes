@@ -45,7 +45,7 @@ jobs:
     name: "3 - Deploy Staging"
     runs-on: ubuntu-latest
     needs: docker-build
-    if: github.ref == 'refs/heads/develop'
+    if: github.event_name != 'pull_request'
     steps:
       - name: Redeploy no Railway Staging
         run: |
@@ -64,7 +64,7 @@ jobs:
     name: "4 - Deploy Producao"
     runs-on: ubuntu-latest
     needs: docker-build
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request'
     steps:
       - name: Redeploy no Railway Producao
         run: |
