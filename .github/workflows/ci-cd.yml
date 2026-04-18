@@ -1,4 +1,4 @@
-$content = @'
+
 name: CI/CD — Cidades ESG Inteligentes
 
 on:
