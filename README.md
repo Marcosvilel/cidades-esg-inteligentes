@@ -183,7 +183,10 @@ Internet │ ▼ ┌────────────────────
 ---
 
 ## 🖥️ Prints do funcionamento
-
+<img src="Assets/Captura de tela 2026-04-17 162648.png" width="500">
+<img src="Assets/Captura de tela 2026-04-17 162718.png" width="500">
+<img src="Assets/Captura de tela 2026-04-17 162730.png" width="500">
+<img src="Assets/Captura de tela 2026-04-17 162805.png" width="500">
 ### Pipeline GitHub Actions — 4 jobs verdes
 Run #14 — Status: Success — 1m 26s
 ✅ 1 - Build e Testes         7s
