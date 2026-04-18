@@ -78,3 +78,5 @@ jobs:
           sleep 40
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://${{ secrets.RAILWAY_URL }}/health)
           echo "Health check Producao: $STATUS"
+
+          
