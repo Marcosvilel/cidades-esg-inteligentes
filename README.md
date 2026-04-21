@@ -248,3 +248,4 @@ Executou 14 testes em 0,013s — OK
 | README.md com instruções e prints | ✅ |
 | Documentação técnica com evidências (PDF) | ✅ |
 | Deploy realizado nos ambientes staging e produção | ✅ |
+
